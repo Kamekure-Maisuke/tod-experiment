@@ -29,7 +29,13 @@
         <!-- Theme Color -->
         <meta name="theme-color" content="#1f2937" />
 
-        <link rel="preload" href="images/logo.webp" as="image" type="image/webp" fetchpriority="high" />
+        <link
+            rel="preload"
+            href="images/logo.webp"
+            as="image"
+            type="image/webp"
+            fetchpriority="high"
+        />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://github.com" />
@@ -40,6 +46,21 @@
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
             fetchpriority="high"
         />
+
+        <style>
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .rotating-logo {
+                animation: rotate 10s linear infinite;
+            }
+        </style>
 
         <!-- Structured Data (JSON-LD) -->
         <script type="application/ld+json">
@@ -85,7 +106,30 @@
                             fetchpriority="high"
                             loading="eager"
                             decoding="async"
-                            style="vertical-align: middle; display: block;"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            loading="eager"
+                            decoding="async"
+                            class="rotating-logo"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            loading="eager"
+                            decoding="async"
+                            style="vertical-align: middle; display: block"
                         />
                     </li>
                 </ul>

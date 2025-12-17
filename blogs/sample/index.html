@@ -49,6 +49,21 @@
             fetchpriority="high"
         />
 
+        <style>
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .rotating-logo {
+                animation: rotate 10s linear infinite;
+            }
+        </style>
+
         <!-- Structured Data (JSON-LD) for Article -->
         <script type="application/ld+json">
             {
@@ -81,6 +96,29 @@
                             width="120"
                             height="120"
                             fetchpriority="high"
+                            loading="eager"
+                            decoding="async"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="../../images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            loading="eager"
+                            decoding="async"
+                            class="rotating-logo"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="../../images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
                             loading="eager"
                             decoding="async"
                             style="vertical-align: middle; display: block"
