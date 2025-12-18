@@ -4,15 +4,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>Blog - t_o_d</title>
-        <meta name="title" content="Blog - t_o_d" />
+        <title>Tool - t_o_d</title>
+        <meta name="title" content="ツール - t_o_d" />
         <meta
             name="description"
-            content="t_o_dのブログ一覧ページ。技術記事やプログラミングに関する記事を掲載しています。"
+            content="t_o_dのツール一覧ページ。便利ツールを掲載しています。"
         />
         <meta
             name="keywords"
-            content="t_o_d, blog, tech blog, 技術ブログ, プログラミング, エンジニアブログ"
+            content="t_o_d, tool, tech プログラミング, ツール"
         />
         <meta name="author" content="t_o_d" />
         <meta name="robots" content="index, follow" />
@@ -20,14 +20,11 @@
 
         <!-- Open Graph -->
         <meta property="og:type" content="website" />
-        <meta
-            property="og:url"
-            content="https://github.com/Kamekure-Maisuke/blogs"
-        />
-        <meta property="og:title" content="Blog - t_o_d" />
+        <meta property="og:url" content="https://github.com/Kamekure-Maisuke" />
+        <meta property="og:title" content="Tool - t_o_d" />
         <meta
             property="og:description"
-            content="t_o_dのブログ一覧ページ。技術記事やプログラミングに関する記事を掲載しています。"
+            content="t_o_dのツール一覧ページ。便利ツールを掲載しています。"
         />
         <meta property="og:locale" content="ja_JP" />
         <meta property="og:site_name" content="t_o_d Portfolio" />
@@ -65,13 +62,13 @@
             }
         </style>
 
-        <!-- Structured Data (JSON-LD) for Blog List -->
+        <!-- Structured Data (JSON-LD) for Tool List -->
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
-                "@type": "Blog",
-                "name": "t_o_d Blog",
-                "description": "t_o_dのブログ。技術記事やプログラミングに関する記事を掲載しています。",
+                "@type": "Tool",
+                "name": "t_o_d Tool",
+                "description": "t_o_dのツール一覧ページ。便利ツールを掲載しています。",
                 "author": {
                     "@type": "Person",
                     "name": "t_o_d"
@@ -128,29 +125,20 @@
             </nav>
         </header>
 
-        <main class="container" role="main" aria-label="Blog List">
+        <main class="container" role="main" aria-label="Tool List">
             <header>
                 <hgroup>
-                    <h1>Blog</h1>
-                    <p>技術記事やプログラミングに関する記事を掲載しています</p>
+                    <h1>ツール</h1>
+                    <p>便利ツールを掲載しています。</p>
                 </hgroup>
             </header>
 
-            <section aria-labelledby="blog-list-heading">
-                <h2 id="blog-list-heading" hidden>記事一覧</h2>
-
-                <article>
-                    <header>
-                        <h3>
-                            <a href="/blogs/sample/">サンプル記事のタイトル</a>
-                        </h3>
-                    </header>
-                    <footer>
-                        <a href="/blogs/sample/" role="button">記事を読む</a>
-                    </footer>
-                </article>
-
-                <!-- 追加の記事はここに追加 -->
+            <section aria-labelledby="tool-list-heading">
+                <h2 id="tool-list-heading" hidden>ツール一覧</h2>
+                <ul>
+                    <li><a href="/tools/password/">パスワード生成</></li>
+                    <li><a href="/tools/ua/">ユーザーエージェント確認</a></li>
+                </ul>
             </section>
 
             <footer role="contentinfo">
