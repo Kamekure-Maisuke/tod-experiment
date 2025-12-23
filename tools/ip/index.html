@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>IP確認 - t_o_d ツール</title>
+        <meta name="title" content="IP確認 - t_o_d ツール" />
+        <meta name="description" content="IP確認ツールです。" />
+        <meta
+            name="keywords"
+            content="t_o_d, tool, tech, IP確認, プログラミング"
+        />
+        <meta name="author" content="t_o_d" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Japanese" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://github.com/Kamekure-Maisuke" />
+        <meta property="og:title" content="IP確認 - t_o_d ツール" />
+        <meta property="og:description" content="これIP確認ツールです。" />
+        <meta property="og:locale" content="ja_JP" />
+        <meta property="og:site_name" content="t_o_d Portfolio" />
+
+        <!-- Theme Color -->
+        <meta name="theme-color" content="#1f2937" />
+
+        <link
+            rel="preload"
+            href="../../images/logo.webp"
+            as="image"
+            type="image/webp"
+            fetchpriority="high"
+        />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+            fetchpriority="high"
+        />
+
+        <style>
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .rotating-logo {
+                animation: rotate 10s linear infinite;
+            }
+        </style>
+
+        <!-- Structured Data (JSON-LD) for Article -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Tool",
+                "name": "t_o_d Tool",
+                "description": "t_o_dのIP確認ツールです。",
+                "author": {
+                    "@type": "Person",
+                    "name": "t_o_d"
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <header class="container" role="banner">
+            <nav>
+                <ul>
+                    <li>
+                        <img
+                            src="../../images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            fetchpriority="high"
+                            loading="eager"
+                            decoding="async"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="../../images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            loading="eager"
+                            decoding="async"
+                            class="rotating-logo"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                    <li>
+                        <img
+                            src="../../images/logo.webp"
+                            alt="t_o_d logo"
+                            width="120"
+                            height="120"
+                            loading="eager"
+                            decoding="async"
+                            style="vertical-align: middle; display: block"
+                        />
+                    </li>
+                </ul>
+                <ul>
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/blogs/">ブログ</a></li>
+                    <li><a href="/tools/">ツール</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="container" role="main" aria-label="IP確認 Tool">
+            <header>
+                <hgroup>
+                    <h1>IP確認ツール</h1>
+                    <p>
+                        あなたのグローバルIPアドレスとその詳細情報を確認できます。
+                    </p>
+                </hgroup>
+            </header>
+
+            <section aria-labelledby="ip-tool-heading">
+                <h2 id="ip-tool-heading" hidden>IP確認ツール</h2>
+
+                <article>
+                    <header>
+                        <h3>あなたのIP情報</h3>
+                    </header>
+
+                    <div id="ip-info">
+                        <p aria-live="polite" aria-busy="true">読み込み中...</p>
+                    </div>
+
+                    <footer>
+                        <button
+                            id="refresh-btn"
+                            onclick="fetchIPInfo()"
+                            aria-label="IP情報を再取得"
+                        >
+                            再取得
+                        </button>
+                    </footer>
+                </article>
+            </section>
+
+            <script>
+                async function fetchIPInfo() {
+                    const infoDiv = document.getElementById("ip-info");
+                    const refreshBtn = document.getElementById("refresh-btn");
+
+                    try {
+                        refreshBtn.setAttribute("aria-busy", "true");
+                        refreshBtn.disabled = true;
+                        infoDiv.setAttribute("aria-busy", "true");
+                        infoDiv.innerHTML =
+                            '<p aria-live="polite">読み込み中...</p>';
+
+                        const ipResponse = await fetch(
+                            "https://api.ipify.org?format=json",
+                        );
+                        if (!ipResponse.ok) {
+                            throw new Error("IPアドレスの取得に失敗しました");
+                        }
+                        const ipData = await ipResponse.json();
+                        const ipAddress = ipData.ip;
+
+                        const detailResponse = await fetch(
+                            `https://ipapi.co/${ipAddress}/json/`,
+                        );
+                        if (!detailResponse.ok) {
+                            throw new Error("IP詳細情報の取得に失敗しました");
+                        }
+                        const detailData = await detailResponse.json();
+
+                        let html = "<dl>";
+                        html += "<dt><strong>IPアドレス</strong></dt>";
+                        html += `<dd><code>${escapeHtml(ipAddress)}</code></dd>`;
+
+                        if (detailData.org) {
+                            html += "<dt><strong>組織/ISP</strong></dt>";
+                            html += `<dd>${escapeHtml(detailData.org)}</dd>`;
+                        }
+
+                        if (detailData.hostname) {
+                            html += "<dt><strong>ホスト名</strong></dt>";
+                            html += `<dd><code>${escapeHtml(detailData.hostname)}</code></dd>`;
+                        }
+
+                        if (detailData.country_name) {
+                            html += "<dt><strong>国</strong></dt>";
+                            html += `<dd>${escapeHtml(detailData.country_name)}`;
+                            if (detailData.city) {
+                                html += ` / ${escapeHtml(detailData.city)}`;
+                            }
+                            html += "</dd>";
+                        }
+
+                        if (detailData.asn) {
+                            html += "<dt><strong>ASN</strong></dt>";
+                            html += `<dd>${escapeHtml(detailData.asn)}</dd>`;
+                        }
+
+                        html += "</dl>";
+
+                        infoDiv.innerHTML = html;
+                        infoDiv.setAttribute("aria-busy", "false");
+                    } catch (error) {
+                        console.error("Error fetching IP info:", error);
+                        infoDiv.innerHTML = `<p role="alert" style="color: var(--pico-del-color);">エラーが発生しました: ${escapeHtml(error.message)}</p>`;
+                        infoDiv.setAttribute("aria-busy", "false");
+                    } finally {
+                        refreshBtn.removeAttribute("aria-busy");
+                        refreshBtn.disabled = false;
+                    }
+                }
+
+                function escapeHtml(unsafe) {
+                    if (!unsafe) return "";
+                    const div = document.createElement("div");
+                    div.textContent = unsafe;
+                    return div.innerHTML;
+                }
+
+                document.addEventListener("DOMContentLoaded", fetchIPInfo);
+            </script>
+
+            <footer role="contentinfo">
+                <small>&copy; 2025 t_o_d. All rights reserved.</small>
+            </footer>
+        </main>
+    </body>
+</html>
