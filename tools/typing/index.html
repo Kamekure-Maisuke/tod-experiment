@@ -133,6 +133,9 @@
                 <article id="game-container">
                     <header style="text-align: center">
                         <h3 id="status">スタートボタンを押してください</h3>
+                        <p style="font-size: 0.9rem; color: var(--pico-muted-color); margin-top: 0.5rem;">
+                            <kbd>i</kbd> スタート / <kbd>Esc</kbd> 解答 / <kbd>u</kbd> リセット
+                        </p>
                     </header>
 
                     <div style="margin: 2rem 0">
@@ -465,6 +468,33 @@
                         correctTextDisplay.innerHTML = "";
                         userTextDisplay.innerHTML = "";
                     }
+
+                    // vi風のキーボードショートカット
+                    document.addEventListener("keydown", function (e) {
+                        // Escape: 解答（入力中でも有効 - vi風の操作性）
+                        if (e.key === "Escape" && !submitBtn.disabled) {
+                            e.preventDefault();
+                            submitAnswer();
+                            return;
+                        }
+
+                        // タイピング入力欄にフォーカスがある時は他のショートカット無効
+                        if (document.activeElement === inputField) {
+                            return;
+                        }
+
+                        // i: スタート
+                        if (e.key === "i" && !startBtn.disabled) {
+                            e.preventDefault();
+                            startGame();
+                        }
+
+                        // u: リセット
+                        if (e.key === "u" && !resetBtn.disabled) {
+                            e.preventDefault();
+                            resetGame();
+                        }
+                    });
                 </script>
             </section>
 
