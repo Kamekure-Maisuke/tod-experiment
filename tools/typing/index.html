@@ -120,10 +120,10 @@
         </header>
 
         <main class="container" role="main" aria-label="タイピング Tool">
-            <header>
-                <hgroup>
-                    <h1>タイピングツール</h1>
-                    <p>タイピング練習ツールです。</p>
+            <header style="margin-bottom: 1rem;">
+                <hgroup style="margin-bottom: 0;">
+                    <h1 style="margin-bottom: 0.5rem;">タイピングツール</h1>
+                    <p style="margin-top: 0;">タイピング練習ツールです。</p>
                 </hgroup>
             </header>
 
@@ -131,30 +131,51 @@
                 <h2 id="typing-tool-heading" hidden>タイピングツール</h2>
 
                 <article id="game-container">
-                    <header style="text-align: center">
-                        <h3 id="status">スタートボタンを押してください</h3>
-                        <p style="font-size: 0.9rem; color: var(--pico-muted-color); margin-top: 0.5rem;">
+                    <div style="text-align: center; margin-bottom: 0.5rem;">
+                        <small style="font-size: 0.8rem; color: var(--pico-muted-color);">
                             <kbd>i</kbd> スタート / <kbd>Esc</kbd> 解答 / <kbd>u</kbd> リセット
-                        </p>
-                    </header>
+                        </small>
+                    </div>
 
-                    <div style="margin: 2rem 0">
+                    <div style="text-align: center; margin: 0.75rem 0;">
+                        <button id="start-btn" onclick="startGame()">
+                            スタート
+                        </button>
+                        <button
+                            id="submit-btn"
+                            onclick="submitAnswer()"
+                            class="contrast"
+                            disabled
+                        >
+                            解答
+                        </button>
+                        <button
+                            id="reset-btn"
+                            onclick="resetGame()"
+                            class="secondary"
+                            disabled
+                        >
+                            リセット
+                        </button>
+                    </div>
+
+                    <div style="margin: 0.75rem 0">
                         <label for="text-display"
                             ><strong>お題の文章</strong></label
                         >
                         <textarea
                             id="text-display"
                             readonly
-                            rows="5"
+                            rows="2"
                             style="
-                                font-size: 1.2rem;
+                                font-size: 1.1rem;
                                 background-color: var(--pico-background-color);
                             "
                             aria-label="お題の文章"
                         ></textarea>
                     </div>
 
-                    <div style="margin: 2rem 0">
+                    <div style="margin: 0.75rem 0">
                         <label for="input-field"
                             ><strong>ここにタイピング</strong></label
                         >
@@ -162,10 +183,10 @@
                             id="input-field"
                             placeholder="スタートボタンを押すと入力できます..."
                             disabled
-                            rows="5"
+                            rows="2"
                             autocomplete="off"
                             aria-label="タイピング入力欄"
-                            style="font-size: 1.2rem"
+                            style="font-size: 1.1rem"
                         ></textarea>
                     </div>
 
@@ -177,14 +198,14 @@
                                 minmax(150px, 1fr)
                             );
                             gap: 1rem;
-                            margin: 2rem 0;
+                            margin: 0.75rem 0;
                         "
                     >
                         <div style="text-align: center">
                             <strong>タイム</strong>
                             <p
                                 id="timer"
-                                style="font-size: 1.5rem; margin: 0.5rem 0"
+                                style="font-size: 1.2rem; margin: 0.25rem 0"
                             >
                                 0.0秒
                             </p>
@@ -193,7 +214,7 @@
                             <strong>正確性</strong>
                             <p
                                 id="accuracy"
-                                style="font-size: 1.5rem; margin: 0.5rem 0"
+                                style="font-size: 1.2rem; margin: 0.25rem 0"
                             >
                                 -
                             </p>
@@ -204,7 +225,7 @@
                         id="result-container"
                         style="
                             display: none;
-                            margin: 2rem 0;
+                            margin: 1rem 0;
                             padding: 1rem;
                             border: 2px solid var(--pico-primary);
                             border-radius: 0.5rem;
@@ -247,28 +268,6 @@
                             </small>
                         </div>
                     </div>
-
-                    <footer style="text-align: center">
-                        <button id="start-btn" onclick="startGame()">
-                            スタート
-                        </button>
-                        <button
-                            id="submit-btn"
-                            onclick="submitAnswer()"
-                            class="contrast"
-                            disabled
-                        >
-                            解答
-                        </button>
-                        <button
-                            id="reset-btn"
-                            onclick="resetGame()"
-                            class="secondary"
-                            disabled
-                        >
-                            リセット
-                        </button>
-                    </footer>
                 </article>
 
                 <script>
@@ -289,7 +288,6 @@
 
                     const textDisplay = document.getElementById("text-display");
                     const inputField = document.getElementById("input-field");
-                    const statusText = document.getElementById("status");
                     const timerDisplay = document.getElementById("timer");
                     const accuracyDisplay = document.getElementById("accuracy");
                     const startBtn = document.getElementById("start-btn");
@@ -384,8 +382,6 @@
                         submitBtn.disabled = false;
                         resetBtn.disabled = false;
 
-                        statusText.textContent =
-                            "表示された文章をタイピングしてください";
                         timerDisplay.textContent = "0.0秒";
                         accuracyDisplay.textContent = "-";
 
@@ -425,17 +421,6 @@
                         // 間違い箇所を表示
                         displayComparison(currentText, userInput);
                         resultContainer.style.display = "block";
-
-                        if (accuracy === 100) {
-                            statusText.textContent = "完璧です！素晴らしい！";
-                        } else if (accuracy >= 90) {
-                            statusText.textContent = "とても良くできました！";
-                        } else if (accuracy >= 70) {
-                            statusText.textContent = "良い調子です！";
-                        } else {
-                            statusText.textContent =
-                                "もう一度挑戦してみましょう！";
-                        }
                     }
 
                     function resetGame() {
@@ -457,8 +442,6 @@
                         submitBtn.disabled = true;
                         resetBtn.disabled = true;
 
-                        statusText.textContent =
-                            "スタートボタンを押してください";
                         timerDisplay.textContent = "0.0秒";
                         accuracyDisplay.textContent = "-";
                         accuracyDisplay.style.color = "";
