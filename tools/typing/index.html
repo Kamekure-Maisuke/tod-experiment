@@ -26,13 +26,6 @@
         <!-- Theme Color -->
         <meta name="theme-color" content="#1f2937" />
 
-        <link
-            rel="preload"
-            href="../../images/logo.webp"
-            as="image"
-            type="image/webp"
-            fetchpriority="high"
-        />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link
@@ -40,21 +33,6 @@
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
             fetchpriority="high"
         />
-
-        <style>
-            @keyframes rotate {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-
-            .rotating-logo {
-                animation: rotate 10s linear infinite;
-            }
-        </style>
 
         <!-- Structured Data (JSON-LD) for Article -->
         <script type="application/ld+json">
@@ -75,43 +53,6 @@
         <header class="container" role="banner">
             <nav>
                 <ul>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            fetchpriority="high"
-                            loading="eager"
-                            decoding="async"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            loading="eager"
-                            decoding="async"
-                            class="rotating-logo"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            loading="eager"
-                            decoding="async"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                </ul>
-                <ul>
                     <li><a href="/">ホーム</a></li>
                     <li><a href="/blogs/">ブログ</a></li>
                     <li><a href="/tools/">ツール</a></li>
@@ -120,10 +61,10 @@
         </header>
 
         <main class="container" role="main" aria-label="タイピング Tool">
-            <header style="margin-bottom: 1rem;">
-                <hgroup style="margin-bottom: 0;">
-                    <h1 style="margin-bottom: 0.5rem;">タイピングツール</h1>
-                    <p style="margin-top: 0;">タイピング練習ツールです。</p>
+            <header style="margin-bottom: 1rem">
+                <hgroup style="margin-bottom: 0">
+                    <h1 style="margin-bottom: 0.5rem">タイピングツール</h1>
+                    <p style="margin-top: 0">タイピング練習ツールです。</p>
                 </hgroup>
             </header>
 
@@ -131,13 +72,19 @@
                 <h2 id="typing-tool-heading" hidden>タイピングツール</h2>
 
                 <article id="game-container">
-                    <div style="text-align: center; margin-bottom: 0.5rem;">
-                        <small style="font-size: 0.8rem; color: var(--pico-muted-color);">
-                            <kbd>i</kbd> スタート / <kbd>Esc</kbd> 解答 / <kbd>u</kbd> リセット
+                    <div style="text-align: center; margin-bottom: 0.5rem">
+                        <small
+                            style="
+                                font-size: 0.8rem;
+                                color: var(--pico-muted-color);
+                            "
+                        >
+                            <kbd>i</kbd> スタート / <kbd>Esc</kbd> 解答 /
+                            <kbd>u</kbd> リセット
                         </small>
                     </div>
 
-                    <div style="text-align: center; margin: 0.75rem 0;">
+                    <div style="text-align: center; margin: 0.75rem 0">
                         <button id="start-btn" onclick="startGame()">
                             スタート
                         </button>

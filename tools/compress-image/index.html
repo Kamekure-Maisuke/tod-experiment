@@ -29,13 +29,6 @@
         <!-- Theme Color -->
         <meta name="theme-color" content="#1f2937" />
 
-        <link
-            rel="preload"
-            href="../../images/logo.webp"
-            as="image"
-            type="image/webp"
-            fetchpriority="high"
-        />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link
@@ -43,21 +36,6 @@
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
             fetchpriority="high"
         />
-
-        <style>
-            @keyframes rotate {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
-            }
-
-            .rotating-logo {
-                animation: rotate 10s linear infinite;
-            }
-        </style>
 
         <!-- Structured Data (JSON-LD) for Article -->
         <script type="application/ld+json">
@@ -77,43 +55,6 @@
     <body>
         <header class="container" role="banner">
             <nav>
-                <ul>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            fetchpriority="high"
-                            loading="eager"
-                            decoding="async"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            loading="eager"
-                            decoding="async"
-                            class="rotating-logo"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                    <li>
-                        <img
-                            src="../../images/logo.webp"
-                            alt="t_o_d logo"
-                            width="120"
-                            height="120"
-                            loading="eager"
-                            decoding="async"
-                            style="vertical-align: middle; display: block"
-                        />
-                    </li>
-                </ul>
                 <ul>
                     <li><a href="/">ホーム</a></li>
                     <li><a href="/blogs/">ブログ</a></li>
@@ -171,11 +112,17 @@
                             <h4>元の画像</h4>
                             <canvas
                                 id="originalCanvas"
-                                style="max-width: 100%; height: auto; border: 1px solid var(--pico-muted-border-color)"
+                                style="
+                                    max-width: 100%;
+                                    height: auto;
+                                    border: 1px solid
+                                        var(--pico-muted-border-color);
+                                "
                             ></canvas>
                             <p>
                                 <small
-                                    >サイズ: <span id="originalSize">-</span></small
+                                    >サイズ:
+                                    <span id="originalSize">-</span></small
                                 >
                             </p>
                         </div>
@@ -183,11 +130,17 @@
                             <h4>圧縮後の画像</h4>
                             <canvas
                                 id="compressedCanvas"
-                                style="max-width: 100%; height: auto; border: 1px solid var(--pico-muted-border-color)"
+                                style="
+                                    max-width: 100%;
+                                    height: auto;
+                                    border: 1px solid
+                                        var(--pico-muted-border-color);
+                                "
                             ></canvas>
                             <p>
                                 <small
-                                    >サイズ: <span id="compressedSize">-</span></small
+                                    >サイズ:
+                                    <span id="compressedSize">-</span></small
                                 >
                             </p>
                         </div>
@@ -225,14 +178,19 @@
                 const qualityValue = document.getElementById("qualityValue");
                 const compressBtn = document.getElementById("compressBtn");
                 const downloadBtn = document.getElementById("downloadBtn");
-                const originalCanvas = document.getElementById("originalCanvas");
+                const originalCanvas =
+                    document.getElementById("originalCanvas");
                 const compressedCanvas =
                     document.getElementById("compressedCanvas");
                 const originalSize = document.getElementById("originalSize");
-                const compressedSize = document.getElementById("compressedSize");
-                const controlsSection = document.getElementById("controlsSection");
-                const previewSection = document.getElementById("previewSection");
-                const actionsSection = document.getElementById("actionsSection");
+                const compressedSize =
+                    document.getElementById("compressedSize");
+                const controlsSection =
+                    document.getElementById("controlsSection");
+                const previewSection =
+                    document.getElementById("previewSection");
+                const actionsSection =
+                    document.getElementById("actionsSection");
 
                 function formatFileSize(bytes) {
                     if (bytes === 0) return "0 Bytes";
@@ -296,7 +254,7 @@
                             0,
                             0,
                             compressedCanvas.width,
-                            compressedCanvas.height
+                            compressedCanvas.height,
                         );
                     } catch (error) {
                         alert("画像の読み込みに失敗しました。");
@@ -330,20 +288,20 @@
                             compressedCanvas.toBlob(
                                 (blob) => resolve(blob),
                                 outputFormat,
-                                quality
+                                quality,
                             );
                         });
 
-                        compressedSize.textContent =
-                            formatFileSize(compressedBlob.size);
+                        compressedSize.textContent = formatFileSize(
+                            compressedBlob.size,
+                        );
 
                         const reduction =
                             ((originalFile.size - compressedBlob.size) /
                                 originalFile.size) *
                             100;
                         if (reduction > 0) {
-                            compressedSize.textContent +=
-                                ` (${Math.round(reduction)}% 削減)`;
+                            compressedSize.textContent += ` (${Math.round(reduction)}% 削減)`;
                         } else {
                             compressedSize.textContent +=
                                 " (サイズが増加しました)";
@@ -366,10 +324,7 @@
                     const a = document.createElement("a");
                     const extension =
                         originalFile.type === "image/png" ? "png" : "jpg";
-                    const baseName = originalFile.name.replace(
-                        /\.[^/.]+$/,
-                        ""
-                    );
+                    const baseName = originalFile.name.replace(/\.[^/.]+$/, "");
 
                     a.href = url;
                     a.download = `${baseName}_compressed.${extension}`;
