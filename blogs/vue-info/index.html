@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>vue.jsメモ - t_o_d Blog</title>
+        <meta name="title" content="vue.jsメモ - t_o_d Blog" />
+        <meta name="description" content="vue.jsメモのブログ記事です。" />
+        <meta
+            name="keywords"
+            content="t_o_d, blog, tech blog, 技術ブログ, プログラミング, Vue.js"
+        />
+        <meta name="author" content="t_o_d" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Japanese" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://github.com/Kamekure-Maisuke" />
+        <meta property="og:title" content="vue.jsメモ - t_o_d Blog" />
+        <meta
+            property="og:description"
+            content="これはvue.jsメモのブログ記事です。"
+        />
+        <meta property="og:locale" content="ja_JP" />
+        <meta property="og:site_name" content="t_o_d Portfolio" />
+        <meta
+            property="article:published_time"
+            content="2025-12-30T00:00:00+09:00"
+        />
+        <meta property="article:author" content="t_o_d" />
+
+        <!-- Theme Color -->
+        <meta name="theme-color" content="#1f2937" />
+
+        <link
+            rel="stylesheet"
+            href="/pico/css/pico.min.css"
+            fetchpriority="high"
+        />
+
+        <!-- Structured Data (JSON-LD) for Article -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "vue.jsメモ",
+                "description": "これはvue.jsメモのブログ記事です。",
+                "author": {
+                    "@type": "Person",
+                    "name": "t_o_d"
+                },
+                "datePublished": "2025-12-30T00:00:00+09:00",
+                "dateModified": "2025-12-30T00:00:00+09:00",
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://github.com/Kamekure-Maisuke/blogs/vue-info/"
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <header class="container" role="banner">
+            <nav>
+                <ul>
+                    <li><a href="/">ホーム</a></li>
+                    <li><a href="/blogs/">ブログ</a></li>
+                    <li><a href="/tools/">ツール</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="container" role="main" aria-label="Blog Post">
+            <article>
+                <header>
+                    <hgroup>
+                        <h1>Vue.jsメモ</h1>
+                        <p>
+                            <time datetime="2025-12-30">2025年12月30日</time>
+                        </p>
+                    </hgroup>
+                </header>
+
+                <section aria-labelledby="intro-heading">
+                    <h2 id="intro-heading">概要</h2>
+                    <p>Vue.jsに関する個人的メモ</p>
+                </section>
+
+                <section aria-labelledby="section1-heading">
+                    <h2 id="section1-heading">v-model</h2>
+
+                    <h3>1. テキスト入力（text / textarea）</h3>
+                    <p>文字列データとして双方向バインディングされます。</p>
+                    <pre><code>&lt;!-- 単一行テキスト --&gt;
+&lt;input v-model="username" type="text" placeholder="ユーザー名" /&gt;
+
+&lt;!-- 複数行テキスト --&gt;
+&lt;textarea v-model="description" rows="4"&gt;&lt;/textarea&gt;
+
+&lt;!-- パスワード --&gt;
+&lt;input v-model="password" type="password" /&gt;
+
+&lt;!-- メール（HTML5バリデーション） --&gt;
+&lt;input v-model="email" type="email" /&gt;</code></pre>
+
+                    <h3>2. チェックボックス（checkbox）</h3>
+                    <p>
+                        単一チェックボックスは<code>boolean</code>、複数チェックボックスは配列にバインドされます。
+                    </p>
+                    <pre><code>&lt;!-- 単一チェックボックス（boolean） --&gt;
+&lt;input v-model="agreed" type="checkbox" id="agree" /&gt;
+&lt;label for="agree"&gt;利用規約に同意する&lt;/label&gt;
+&lt;!-- agreed: true or false --&gt;
+
+&lt;!-- 複数チェックボックス（配列） --&gt;
+&lt;div&gt;
+  &lt;input v-model="selectedHobbies" type="checkbox" value="reading" id="reading" /&gt;
+  &lt;label for="reading"&gt;読書&lt;/label&gt;
+
+  &lt;input v-model="selectedHobbies" type="checkbox" value="sports" id="sports" /&gt;
+  &lt;label for="sports"&gt;スポーツ&lt;/label&gt;
+
+  &lt;input v-model="selectedHobbies" type="checkbox" value="music" id="music" /&gt;
+  &lt;label for="music"&gt;音楽&lt;/label&gt;
+&lt;/div&gt;
+&lt;!-- selectedHobbies: ['reading', 'sports'] など --&gt;</code></pre>
+
+                    <h3>3. ラジオボタン（radio）</h3>
+                    <p>
+                        選択された値の<code>value</code>属性がバインドされます。
+                    </p>
+                    <pre><code>&lt;div&gt;
+  &lt;input v-model="gender" type="radio" value="male" id="male" /&gt;
+  &lt;label for="male"&gt;男性&lt;/label&gt;
+
+  &lt;input v-model="gender" type="radio" value="female" id="female" /&gt;
+  &lt;label for="female"&gt;女性&lt;/label&gt;
+
+  &lt;input v-model="gender" type="radio" value="other" id="other" /&gt;
+  &lt;label for="other"&gt;その他&lt;/label&gt;
+&lt;/div&gt;
+&lt;!-- gender: 'male', 'female', 'other' のいずれか --&gt;</code></pre>
+
+                    <h3>4. セレクトボックス（select）</h3>
+                    <p>
+                        単一選択は文字列、複数選択（<code>multiple</code>）は配列にバインドされます。
+                    </p>
+                    <pre><code>&lt;!-- 単一選択 --&gt;
+&lt;select v-model="selectedCountry"&gt;
+  &lt;option disabled value=""&gt;国を選択してください&lt;/option&gt;
+  &lt;option value="jp"&gt;日本&lt;/option&gt;
+  &lt;option value="us"&gt;アメリカ&lt;/option&gt;
+  &lt;option value="uk"&gt;イギリス&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- 複数選択 --&gt;
+&lt;select v-model="selectedLanguages" multiple&gt;
+  &lt;option value="js"&gt;JavaScript&lt;/option&gt;
+  &lt;option value="py"&gt;Python&lt;/option&gt;
+  &lt;option value="go"&gt;Go&lt;/option&gt;
+&lt;/select&gt;
+&lt;!-- selectedLanguages: ['js', 'py'] など --&gt;</code></pre>
+
+                    <h3>5. 修飾子（Modifiers）</h3>
+                    <p>
+                        <code>v-model</code>には便利な修飾子が用意されています。
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>.lazy</strong> -
+                            <code>input</code
+                            >イベントではなく<code>change</code>イベントで更新（入力完了時に同期）
+                        </li>
+                        <li>
+                            <strong>.number</strong> -
+                            入力を自動的に数値型に変換
+                        </li>
+                        <li>
+                            <strong>.trim</strong> -
+                            入力の前後の空白を自動的に削除
+                        </li>
+                    </ul>
+                    <pre><code>&lt;!-- .lazy: フォーカスが外れたときに更新 --&gt;
+&lt;input v-model.lazy="message" type="text" /&gt;
+
+&lt;!-- .number: 数値型に自動変換 --&gt;
+&lt;input v-model.number="age" type="number" /&gt;
+
+&lt;!-- .trim: 前後の空白を削除 --&gt;
+&lt;input v-model.trim="username" type="text" /&gt;
+
+&lt;!-- 修飾子は複数併用可能 --&gt;
+&lt;input v-model.lazy.trim="email" type="email" /&gt;</code></pre>
+
+                    <h3>6. ベストプラクティス</h3>
+                    <ul>
+                        <li>
+                            <strong>初期値の設定:</strong>
+                            <code>data()</code
+                            >で必ず初期値を設定（undefinedを避ける）
+                        </li>
+                        <li>
+                            <strong>type属性の指定:</strong>
+                            HTML5のtype属性を活用してバリデーションを強化
+                        </li>
+                        <li>
+                            <strong>アクセシビリティ:</strong>
+                            <code>label</code
+                            >要素と<code>id</code>属性を適切に紐付ける
+                        </li>
+                        <li>
+                            <strong>number型の注意:</strong>
+                            <code>.number</code
+                            >修飾子は<code>type="number"</code>と併用すると効果的
+                        </li>
+                        <li>
+                            <strong>配列の初期化:</strong>
+                            チェックボックス（複数）やセレクト（複数）は空配列<code>[]</code>で初期化
+                        </li>
+                    </ul>
+
+                    <h3>7. よくあるパターン</h3>
+                    <pre><code>&lt;!-- パターン1: 検索フォーム --&gt;
+&lt;input v-model.trim="searchQuery" type="search" placeholder="検索..." /&gt;
+
+&lt;!-- パターン2: 年齢入力（数値、1-120の範囲） --&gt;
+&lt;input v-model.number="age" type="number" min="1" max="120" /&gt;
+
+&lt;!-- パターン3: タグ選択（複数チェックボックス） --&gt;
+&lt;label&gt;&lt;input v-model="tags" type="checkbox" value="tech" /&gt; Tech&lt;/label&gt;
+&lt;label&gt;&lt;input v-model="tags" type="checkbox" value="news" /&gt; News&lt;/label&gt;
+
+&lt;!-- パターン4: 優先度選択（ラジオボタン） --&gt;
+&lt;label&gt;&lt;input v-model="priority" type="radio" value="high" /&gt; 高&lt;/label&gt;
+&lt;label&gt;&lt;input v-model="priority" type="radio" value="low" /&gt; 低&lt;/label&gt;</code></pre>
+                </section>
+
+                <footer>
+                    <nav aria-label="Blog navigation">
+                        <a href="/blogs/" role="button" class="secondary"
+                            >ブログ一覧に戻る</a
+                        >
+                    </nav>
+                </footer>
+            </article>
+
+            <footer role="contentinfo">
+                <small>&copy; 2025 t_o_d. All rights reserved.</small>
+            </footer>
+        </main>
+    </body>
+</html>
