@@ -51,15 +51,7 @@
     </head>
 
     <body>
-        <header class="container" role="banner">
-            <nav>
-                <ul>
-                    <li><a href="/">ホーム</a></li>
-                    <li><a href="/blogs/">ブログ</a></li>
-                    <li><a href="/tools/">ツール</a></li>
-                </ul>
-            </nav>
-        </header>
+        <site-header></site-header>
 
         <main class="container" role="main" aria-label="サイト情報確認 Tool">
             <header>
@@ -144,7 +136,9 @@
                     const data = await response.json();
 
                     if (!response.ok || !data.success) {
-                        throw new Error(data.error || "Failed to fetch site information");
+                        throw new Error(
+                            data.error || "Failed to fetch site information",
+                        );
                     }
 
                     displayInfo(data.info);
@@ -179,5 +173,7 @@
                     .replace(/'/g, "&#039;");
             }
         </script>
+        <script src="/site-header.js" defer></script>
+        <script src="/presence.js" defer></script>
     </body>
 </html>
